@@ -16,10 +16,14 @@ import dgl
 
 def main():
     # seed 12, 34, 42, 43, 61, 70, 83, 1024, 2014, 2047
+    # 解析命令行参数
     args = parse_args()
     seed = args.seed
+    
+    # 设置随机数种子
     set_seed(1897)
 
+    # 通过读取的命令行参数设置各种参数
     if torch.cuda.is_available() and args.gpu:
         device = 'cuda'
     else:
@@ -46,6 +50,8 @@ def main():
     data_info['relation_num'] = relation_num
     data_info['score_fun'] = score_fun
     data_info['seed'] = seed
+    
+    # 读取数据 9.2-------------------here
     # drug treats disease triple
     dd_triples = data.load_data('treats')
     # knowledge triple
